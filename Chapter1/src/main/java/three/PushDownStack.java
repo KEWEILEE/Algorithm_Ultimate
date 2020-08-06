@@ -10,7 +10,7 @@ public class PushDownStack<T> implements Iterable {
     public int N; //total Number
 
     public boolean isEmpty() {
-        return N > 0;
+        return N == 0;
     }
 
     public void push(T t) {
