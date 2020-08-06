@@ -9,11 +9,6 @@ public class PushDownStack<T> implements Iterable {
     public Node First; //The first reference
     public int N; //total Number
 
-    private class Node {
-        T item;
-        Node next;
-    }
-
     public boolean isEmpty() {
         return N > 0;
     }
@@ -28,7 +23,7 @@ public class PushDownStack<T> implements Iterable {
 
     public T pop() {
         N--;
-        T t = First.item;
+        T t = (T) First.item;
         First = First.next;
         return t;
     }
