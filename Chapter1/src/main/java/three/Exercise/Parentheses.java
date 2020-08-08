@@ -1,6 +1,5 @@
 package three.Exercise;
 
-import org.junit.Test;
 import three.PushDownStack;
 
 public class Parentheses {
@@ -15,22 +14,28 @@ public class Parentheses {
     public static boolean Test(String s) {
         PushDownStack<Character> stack = new PushDownStack<>();
         char[] chars = s.toCharArray();
-        boolean flag = true;
         for (char c : chars) {
             if (c == '[' || c == '(' || c == '{') {
                 stack.push(c);
-            } else if (c == ']') {
-                flag = '[' == stack.pop();
-            } else if (c == ')') {
-                flag = '(' == stack.pop();
-            } else if (c == '}') {
-                flag = '{' == stack.pop();
-            }
-            if (!flag) {
-                return flag;
+            } else {
+                if (!pair(c, stack.pop())){
+                    return false;
+                }
             }
         }
+        return stack.isEmpty();
+    }
 
-        return flag;
+    public static boolean pair(char l, char r) {
+        switch (l) {
+            case '}':
+                return r == '{';
+            case ']':
+                return r == '[';
+            case ')':
+                return r == '(';
+            default:
+                return false;
+        }
     }
 }
