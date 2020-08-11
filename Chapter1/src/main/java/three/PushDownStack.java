@@ -13,6 +13,10 @@ public class PushDownStack<T> implements Iterable {
         return N == 0;
     }
 
+    public T peek() {
+        return (T) First.item;
+    }
+
     public void push(T t) {
         Node node = new Node();
         node.item = t;
