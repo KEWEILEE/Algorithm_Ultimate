@@ -14,7 +14,7 @@ public class InfixToPostFix {
         String out = "";
         for (char c : chars) {
             if (Character.isLetter(c)) {
-                out = out + String.valueOf(c);
+                out = out + c;
             }
             if ("+-*/(".contains(String.valueOf(c))) {
                 if (stack.isEmpty() || c == '(' || stack.peek() == '(') {
@@ -46,11 +46,7 @@ public class InfixToPostFix {
     //优先级大，优先级小或者等于 左边比右边
     public static boolean priority(char left, char right) {
         if (left == '*' || left == '/') {
-            if (right == '*' || left == '/') {
-                return false;
-            } else {
-                return true;
-            }
+            return right != '*' && right != '/';
         } else {
             return false;
         }
