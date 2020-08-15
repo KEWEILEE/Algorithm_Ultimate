@@ -28,12 +28,25 @@ public class PushDownStack<T> implements Iterable {
         return t;
     }
 
-    public T peek(){
+    public T peek() {
         return (T) First.item;
     }
 
-    public Iterator iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            Node node = First;
+            @Override
+            public boolean hasNext() {
+                return First != null;
+            }
+
+            @Override
+            public T next() {
+                T out = (T) First.item;
+                First = First.next;
+                return out;
+            }
+        };
     }
 
     @Test
@@ -43,8 +56,12 @@ public class PushDownStack<T> implements Iterable {
         pushDownStack.push("second");
         pushDownStack.push("third");
 
-        System.out.println(pushDownStack.pop());
-        System.out.println(pushDownStack.pop());
-        System.out.println(pushDownStack.pop());
+//        System.out.println(pushDownStack.pop());
+//        System.out.println(pushDownStack.pop());
+//        System.out.println(pushDownStack.pop());
+
+        for (Object s : pushDownStack){
+            System.out.println(s);
+        }
     }
 }
