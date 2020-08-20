@@ -23,7 +23,7 @@ public class InfixToPostFix {
                     if (priority(c, stack.peek())) {
                         stack.push(c);
                     } else {
-                        while (!stack.isEmpty()&&stack.peek() != '(') {
+                        while (!stack.isEmpty() && stack.peek() != '(') {
                             out += stack.pop();
                         }
                         stack.push(c);
@@ -32,7 +32,7 @@ public class InfixToPostFix {
             }
             if (c == ')') {
                 while (stack.peek() != '(') {
-                    out+=stack.pop();
+                    out += stack.pop();
                 }
                 stack.pop();
             }
