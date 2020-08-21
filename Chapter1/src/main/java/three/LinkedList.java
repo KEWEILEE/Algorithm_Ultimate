@@ -91,4 +91,59 @@ public class LinkedList<T> {
         }
         return false;
     }
+
+    /**
+     * Write a method removeAfter() that takes a linked-list Node as argument
+     * and removes the node following the given one
+     * (and does nothing if the argument or the next field in the argument node is null).
+     *
+     * @param node
+     */
+    public void removeAfter(Node node) {
+        //empty
+        if (First == null || node == null) {
+            return;
+        }
+        //at least one element
+        Node<T> previous = null;
+        Node<T> current = First;
+
+        while (current != null) {
+            if(current.item == node.item){ //find it then break
+                break;
+            }
+            previous = current;
+            current = current.next;
+        }
+
+        if (previous == null){//the first one is the one
+            First = null;
+        }else if (current == null){//cannot find it
+            return;
+        }else{
+            previous.next = null; // find one
+        }
+    }
+
+    /**
+     * WriteamethodinsertAfter()that takes two linked-list Node arguments and
+     * inserts the second after the first on its list
+     * (and does nothing if either argument is null).
+     */
+    public void insertAfter(Node<T> first, Node<T> second){
+        if (first == null || second == null || First == null){
+            return;
+        }
+        Node<T> current = First; //at least one element
+        while (current != null && current.item != first.item){
+            current = current.next;
+        }
+
+        if (current == null){ // no
+            return;
+        }else{ //找到了
+            second.next = current.next;
+            current.next = second;
+        }
+    }
 }
