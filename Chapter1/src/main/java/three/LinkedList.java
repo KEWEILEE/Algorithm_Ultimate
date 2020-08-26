@@ -109,18 +109,18 @@ public class LinkedList<T> {
         Node<T> current = First;
 
         while (current != null) {
-            if(current.item == node.item){ //find it then break
+            if (current.item == node.item) { //find it then break
                 break;
             }
             previous = current;
             current = current.next;
         }
 
-        if (previous == null){//the first one is the one
+        if (previous == null) {//the first one is the one
             First = null;
-        }else if (current == null){//cannot find it
+        } else if (current == null) {//cannot find it
             return;
-        }else{
+        } else {
             previous.next = null; // find one
         }
     }
@@ -130,20 +130,83 @@ public class LinkedList<T> {
      * inserts the second after the first on its list
      * (and does nothing if either argument is null).
      */
-    public void insertAfter(Node<T> first, Node<T> second){
-        if (first == null || second == null || First == null){
+    public void insertAfter(Node<T> first, Node<T> second) {
+        if (first == null || second == null || First == null) {
             return;
         }
         Node<T> current = First; //at least one element
-        while (current != null && current.item != first.item){
+        while (current != null && current.item != first.item) {
             current = current.next;
         }
 
-        if (current == null){ // no
+        if (current == null) { // no
             return;
-        }else{ //找到了
+        } else { //找到了
             second.next = current.next;
             current.next = second;
         }
+    }
+
+    /**
+     * Write a method remove() that takes a linked list and a string key as arguments
+     * and removes all of the nodes in the list that have key as its item field.
+     *
+     * @param key
+     */
+    public void remove(T key) {
+        Node<T> previous = null;
+        Node<T> current = First;
+
+        if (current == null) {
+            return;
+        }
+
+        while (current != null) {
+            if (current.item == key) {
+                if (previous == null) { //第一个就是要找的
+                    //remove
+                    First = current.next;
+                } else {
+                    previous.next = current.next; //remove
+                }
+            } else {
+                previous = current; //only happens when nothing removed
+            }
+            current = current.next;
+        }
+    }
+
+    /**
+     * Write a method max() that takes a reference to the first node in a linked list as
+     * argument and returns the value of the maximum key in the list. Assume that all keys are
+     * positive integers, and return 0 if the list is empty.
+     */
+    public int max() {
+        if (First == null) {
+            return 0;
+        }
+
+        int max = (Integer) First.item;
+
+        Node<Integer> current = First.next;
+
+        while (current != null) {
+            max = (current.item > max) ? current.item : max;
+            current = current.next;
+        }
+
+        return max;
+    }
+
+    public int maxRecursive() {
+        return maxRec((Node<Integer>) First);
+    }
+
+    private int maxRec(Node<Integer> node) {
+        if (node.next == null) {
+            return node.item;
+        }
+        int maxNminus1 = maxRec(node.next);
+        return node.item > maxNminus1 ? node.item : maxNminus1;
     }
 }
