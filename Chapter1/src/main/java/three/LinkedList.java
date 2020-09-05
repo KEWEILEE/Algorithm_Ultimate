@@ -209,4 +209,9 @@ public class LinkedList<T> {
         int maxNminus1 = maxRec(node.next);
         return node.item > maxNminus1 ? node.item : maxNminus1;
     }
+
+    public Node<T> reverse(){
+        Node<T> reverse = new Node<>();
+        Node<T>
+    }
 }
