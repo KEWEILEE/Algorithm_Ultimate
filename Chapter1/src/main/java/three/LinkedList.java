@@ -210,8 +210,52 @@ public class LinkedList<T> {
         return node.item > maxNminus1 ? node.item : maxNminus1;
     }
 
-    public Node<T> reverse(){
-        Node<T> reverse = new Node<>();
-        Node<T>
+    public Node<T> reverse() {
+        //first reverse node is null
+        Node<T> reverse = null;
+        if (First == null) {
+            return reverse;
+        }
+        Node<T> firstNode = First;
+        Node<T> secondNode = First.next;
+
+        while (firstNode != null) {
+            //basic operation
+            firstNode.next = reverse;
+            reverse = firstNode;
+
+            if (secondNode == null) {
+                //this is the last node needs to be moved
+                firstNode = secondNode;
+            } else {
+                firstNode = secondNode;
+                secondNode = secondNode.next;
+            }
+        }
+        return reverse;
+    }
+
+    public Node<T> reversedRecursive() {
+        return revRec(First);
+    }
+
+    private Node<T> revRec(Node<T> node) {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.next == null) {
+            return node;
+        }
+        //next node
+        Node next = node.next;
+
+        //do the n-1 reverse
+        Node<T> out = revRec(next);
+
+        next.next = node;
+        node.next = null;
+
+        return out;
     }
 }
